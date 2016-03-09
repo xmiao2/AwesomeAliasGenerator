@@ -2,10 +2,60 @@
 
 <head>
     <title>Awesome Alias Generator</title>
+<<<<<<< HEAD
     <style>
         .hidden {
             display: none;
         }
+=======
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            background-image: url("pattern.jpg");
+            background-repeat: repeat;
+            font-family: 'Passion One', cursive;
+            font-size: 14px;
+            padding-top: 3rem;
+        }
+
+        #control, #loading {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1 {
+            display: block;
+            text-align: center;
+            font-size: 4rem;
+            padding-bottom: 3rem;
+        }
+
+        form {
+            display: inline-block;
+            padding: 2rem;
+            border: black 1px solid;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-top: 2rem;
+        }
+        .form-group:first-child {
+            margin-top: 0;
+        }
+
+        button, input {
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+>>>>>>> ec695d88692e036f840bd052dbc506b3639149f8
     </style>
 </head>
 
@@ -16,8 +66,17 @@
     </div>
     <div id="control" class="hidden">
         <form onSubmit="return AwesomeAlias.getAlias()">
+<<<<<<< HEAD
             <input id="alias" type="text" readonly>
             <button type="submit">Get Me Awesome Alias!</button>
+=======
+            <div class="form-group">
+                <input id="alias" type="text" readonly placeholder="Press button below...">
+            </div>
+            <div class="form-group">
+                <button type="submit">Get Me Awesome Alias!</button>
+            </div>
+>>>>>>> ec695d88692e036f840bd052dbc506b3639149f8
         </form>
     </div>
 
