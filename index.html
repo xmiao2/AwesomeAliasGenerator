@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>Awesome Alias Generator</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Awesome Alias Generator <small>(in VanillaJS)</small></h1>
+    <div id="loading">
+        Loading...
+    </div>
+    <div id="control" class="hidden">
+        <form onSubmit="return AwesomeAlias.getAlias()">
+            <input id="alias" type="text" readonly>
+            <button type="submit">Get Me Awesome Alias!</button>
+        </form>
+    </div>
+
+    <script>
+    "use strict";
+    window.AwesomeAlias = (function(){
+        var xhttp = new XMLHttpRequest(),
+            ATTR_COUNT = "count",
+            ATTR_NAME = "name",
+            ID_ALIAS = "alias",
+            ID_LOADING = "loading",
+            ID_CONTROL = "control",
+            CLASS_HIDDEN = "hidden",
+            API_ROOT = "http://pokeapi.co/api/v2/pokemon/",
+            count = 0,
+            FALLBACK_NAME = "Nullixor",
+
+            _getRandomId = function() {
+                return Math.floor(Math.random()*count);
+            },
+
+            _getAlias = function() {
+                var aliasEl = document.getElementById(ID_ALIAS);
+                aliasEl.value = "loading...";
+                xhttp.open("GET", API_ROOT+_getRandomId()+"/", true);
+                xhttp.onreadystatechange = function() {
+                    if(xhttp.readyState == 4 && xhttp.status == 200) {
+                        aliasEl.value = JSON.parse(xhttp.response)[ATTR_NAME];
+                    }
+                }
+                xhttp.send();
+            }
+        ;
+
+        return {
+            init: function() {
+                xhttp.open("GET", API_ROOT, true);
+                xhttp.onreadystatechange = function() {
+                    var loadingEl = document.getElementById(ID_LOADING),
+                        controlEl = document.getElementById(ID_CONTROL);   
+                    if(xhttp.readyState == 4 && xhttp.status == 200) {              
+                        loadingEl.className = loadingEl.className + CLASS_HIDDEN;
+                        controlEl.className = controlEl.className.replace(CLASS_HIDDEN, "");
+                        count = JSON.parse(xhttp.response)[ATTR_COUNT];
+                    } else {
+                        loadingEl.text = "Error! Something wrong happened!";
+                    }
+                }
+                xhttp.send();
+            },
+            getAlias: function() {
+                _getAlias();
+                return false;
+            }
+        }
+    })();
+
+    (function() {
+        AwesomeAlias.init();
+    })();
+    </script>
+</body>
+
+</html>
